@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Store App</div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/products/add">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2><%= title %></h2>
+        <% if (typeof products !== 'undefined') { %>
+        <div class="product-grid">
+            <% products.forEach(product => { %>
+            <div class="product-card">
+                <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
+                <h3><%= product.name %></h3>
+                <p><%= product.description %></p>
+                <p>$<%= product.price.toFixed(2) %></p>
+                <a href="/products/<%= product._id %>">View Details</a>
+            </div>
+            <% }) %>
+        </div>
+        <% } else { %>
+        <p>Welcome to our store!</p>
+        <p><a href="/products" class="btn">Browse Products</a> or <a href="/products/add" class="btn">Add New Product</a></p>
+        <% } %>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Store App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h2><%= title %></h2>
+  
+  <form action="/products/add" method="POST" class="product-form">
+    <div class="form-group">
+      <label for="name">Product Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" rows="4"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="price">Price ($):</label>
+      <input type="number" id="price" name="price" step="0.01" min="0" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="imageUrl">Image URL:</label>
+      <input type="url" id="imageUrl" name="imageUrl">
+    </div>
+    
+    <div class="form-group">
+      <button type="submit" class="btn">Add Product</button>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

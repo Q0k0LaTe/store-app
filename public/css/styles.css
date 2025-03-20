@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    }
+    
+    header, footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    }
+    
+    header h1 {
+    margin: 0;
+    }
+    
+    nav {
+    margin-top: 10px;
+    }
+    
+    nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    }
+    
+    nav a:hover {
+    text-decoration: underline;
+    }
+    
+    .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    }
+    
+    .product-card {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1 1 200px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    }
+    
+    .product-card h3 {
+    margin: 10px 0;
+    }
+    
+    .product-card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    }
+    
+    .product-card a:hover {
+    background: #555;
+    }
+    
+    /* Form Styling */
+    .product-form {
+    max-width: 600px;
+    margin: 0 auto;
+    }
+    
+    .form-group {
+    margin-bottom: 15px;
+    }
+    
+    .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+    
+    .form-group textarea {
+    resize: vertical;
+    }
+    
+    .btn {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    }
+    
+    .btn:hover {
+    background: #555;
+    }
