@@ -42,4 +42,29 @@ router.post('/add', async (req, res) => {
   }
 });
 
+// GET /products/:id - view a specific product
+router.get('/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    
+    if (!product) {
+      return res.status(404).render('error', { 
+        title: 'Product Not Found',
+        message: 'The requested product could not be found.'
+      });
+    }
+    
+    res.render('products/details', { title: product.name, product });
+  } catch (err) {
+    console.error(err);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).render('error', { 
+        title: 'Invalid Product ID',
+        message: 'The product ID provided is not valid.'
+      });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
 export default router;
