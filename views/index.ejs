@@ -1,43 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">Store App</div>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/products/add">Add Product</a></li>
-            </ul>
-        </nav>
-    </header>
+<%- include('./partials/header') %>
 
-    <div class="container">
-        <h2><%= title %></h2>
-        <% if (typeof products !== 'undefined') { %>
-        <div class="product-grid">
-            <% products.forEach(product => { %>
-            <div class="product-card">
-                <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
-                <h3><%= product.name %></h3>
-                <p><%= product.description %></p>
-                <p>$<%= product.price.toFixed(2) %></p>
-                <a href="/products/<%= product._id %>">View Details</a>
-            </div>
-            <% }) %>
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-5 fw-bold"><%= title %></h1>
+          <p class="col-md-8 fs-4">Welcome to our online store! Browse our products or add new ones to our collection.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="/products" class="btn btn-primary btn-lg px-4 me-md-2">Browse Products</a>
+            <a href="/products/add" class="btn btn-outline-secondary btn-lg px-4">Add New Product</a>
+          </div>
         </div>
-        <% } else { %>
-        <p>Welcome to our store!</p>
-        <p><a href="/products" class="btn">Browse Products</a> or <a href="/products/add" class="btn">Add New Product</a></p>
-        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <% if (typeof products !== 'undefined' && products.length > 0) { %>
+    <div class="row mb-2">
+      <div class="col">
+        <h2>Featured Products</h2>
+      </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Store App. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+      <% products.forEach(product => { %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="<%= product.imageUrl || '/images/placeholder.png' %>" class="card-img-top" 
+                 alt="<%= product.name %>" style="height: 200px; object-fit: contain; padding: 15px;">
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text text-truncate"><%= product.description %></p>
+              <p class="card-text fw-bold text-primary">$<%= product.price.toFixed(2) %></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+              <a href="/products/<%= product._id %>" class="btn btn-primary w-100">View Details</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('./partials/footer') %>

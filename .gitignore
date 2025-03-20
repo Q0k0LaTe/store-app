@@ -1,0 +1,39 @@
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# MongoDB local data
+data/
+
+# Logs
+logs
+*.log
+
+# Optional: build directories
+dist/
+build/
+
+# Optional: coverage directory used by tools like istanbul
+coverage/
