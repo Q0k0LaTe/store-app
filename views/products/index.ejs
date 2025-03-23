@@ -19,7 +19,16 @@
             <p class="card-text fw-bold text-primary">$<%= product.price.toFixed(2) %></p>
           </div>
           <div class="card-footer bg-transparent border-top-0">
-            <a href="/products/<%= product._id %>" class="btn btn-primary w-100">View Details</a>
+            <div class="d-flex justify-content-between">
+              <!-- Add to Cart Form -->
+              <form action="/cart/add" method="POST" class="d-inline me-2">
+                <input type="hidden" name="productId" value="<%= product._id %>">
+                <!-- Default quantity is 1 -->
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn btn-success btn-sm">Add to Cart</button>
+              </form>
+              <a href="/products/<%= product._id %>" class="btn btn-primary btn-sm">View Details</a>
+            </div>
           </div>
         </div>
       </div>

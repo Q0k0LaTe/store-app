@@ -1,0 +1,100 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h2><%= title %></h2>
+    </div>
+  </div>
+  
+  <% if (cartItems && cartItems.length > 0) { %>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cartItems.forEach(item => { %>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img src="<%= item.product.imageUrl || '/images/placeholder.png' %>" 
+                             alt="<%= item.product.name %>" style="width: 50px; height: 50px; object-fit: contain;" 
+                             class="me-3">
+                        <a href="/products/<%= item.product._id %>"><%= item.product.name %></a>
+                      </div>
+                    </td>
+                    <td>$<%= item.product.price.toFixed(2) %></td>
+                    <td>
+                      <form action="/cart/update" method="POST" class="d-flex align-items-center">
+                        <input type="hidden" name="productId" value="<%= item.product._id %>">
+                        <input type="number" name="quantity" value="<%= item.quantity %>" 
+                               min="1" class="form-control form-control-sm" style="width: 60px;">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary ms-2">Update</button>
+                      </form>
+                    </td>
+                    <td>$<%= (item.product.price * item.quantity).toFixed(2) %></td>
+                    <td>
+                      <form action="/cart/remove" method="POST">
+                        <input type="hidden" name="productId" value="<%= item.product._id %>">
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">Order Summary</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+              <span>Subtotal:</span>
+              <span>$<%= total.toFixed(2) %></span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-3 fw-bold">
+              <span>Total:</span>
+              <span>$<%= total.toFixed(2) %></span>
+            </div>
+            <div class="d-grid gap-2">
+              <a href="/checkout" class="btn btn-primary">Proceed to Checkout</a>
+              <form action="/cart/clear" method="POST" class="d-grid">
+                <button type="submit" class="btn btn-outline-secondary">Clear Cart</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="row">
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body text-center p-5">
+            <h3 class="mb-4">Your cart is empty</h3>
+            <p>Looks like you haven't added any products to your cart yet.</p>
+            <a href="/products" class="btn btn-primary">Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

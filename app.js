@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import session from 'express-session';
 import productsRouter from './routes/products.js';
+import cartRouter from './routes/cart.js';
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +27,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Session middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 3600000 } // 1 hour
+}));
+
+// Make session cart data available to templates
+app.use((req, res, next) => {
+  res.locals.req = req;
+  next();
+});
+
 // Connect to MongoDB Atlas using environment variable
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -38,8 +54,9 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Home' });
 });
 
-// Mount products route
+// Mount routes
 app.use('/products', productsRouter);
+app.use('/cart', cartRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
